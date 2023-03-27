@@ -17,15 +17,16 @@ db.init_app(app)
 api = Api(app)
 
 class Home(Resource):
+
     def get(self):
-        
+
         response_dict = {
-            'message': 'Welcome to the Newsletter RESTful API',
+            "message": "Welcome to the Newsletter RESTful API",
         }
 
         response = make_response(
             response_dict,
-            200
+            200,
         )
 
         return response
@@ -40,7 +41,7 @@ class Newsletters(Resource):
 
         response = make_response(
             response_dict_list,
-            200
+            200,
         )
 
         return response
@@ -49,7 +50,7 @@ class Newsletters(Resource):
 
         new_record = Newsletter(
             title=request.form['title'],
-            body=request.form['body']
+            body=request.form['body'],
         )
 
         db.session.add(new_record)
@@ -66,7 +67,6 @@ class Newsletters(Resource):
 
 api.add_resource(Newsletters, '/newsletters')
 
-
 class NewsletterByID(Resource):
 
     def get(self, id):
@@ -79,9 +79,11 @@ class NewsletterByID(Resource):
         )
 
         return response
-    
+
 api.add_resource(NewsletterByID, '/newsletters/<int:id>')
 
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
+    app.run(port=5555)
+
+    
